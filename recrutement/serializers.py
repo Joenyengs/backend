@@ -25,7 +25,7 @@ class CandidatureFrontendSerializer(serializers.ModelSerializer):
     class Meta:
         model = Candidature
         fields = [
-            'id', 'titre', 'commentaire_admin', 'candidat', 'formation', 'filiere',
+            'id', 'numero', 'titre', 'commentaire_admin', 'candidat', 'formation', 'filiere',
             'statut', 'dateDepot', 'province', 'documents'
         ]
 

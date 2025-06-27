@@ -34,6 +34,7 @@ class Candidature(models.Model):
         default=uuid.uuid4,  # génère automatiquement un nouveau UUID
         editable=False  # empêche le modification manuelle
     )
+    numero = models.CharField(max_length=20, unique=True, editable=False, blank=True)
     candidat = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='candidatures')
     titre = models.CharField(max_length=255)
     lettre_motivation = models.FileField(upload_to=candidature_upload_path, max_length=255, null=True, blank=True)
@@ -48,6 +49,35 @@ class Candidature(models.Model):
 
     def __str__(self):
         return f"{self.candidat.email} - {self.titre}"
+
+    def save(self, *args, **kwargs):
+        if not self.numero:
+            # Récupérer l'année en cours
+            annee = date.today().year
+            # Si l'année est inférieure à 2013, on la considère comme 2013
+            if annee < 2013:
+                annee = 2013
+            # Récupérer les initiales de la province d'origine
+            province = getattr(self.candidat.profil_candidat, 'province_origine', None)
+            if province:
+                initiales = ''.join([word[0] for word in province.upper().split()])[:3]
+                initiales = initiales.ljust(3, 'X')
+            else:
+                initiales = 'XXX'
+            # Calculer le numéro d'ordre
+            prefix = f"ENA{annee}{initiales}"
+            last_num = (
+                Candidature.objects
+                .filter(numero__startswith=prefix)
+                .order_by('-numero')
+                .first()
+            )
+            if last_num and last_num.numero[-5:].isdigit():
+                ordre = int(last_num.numero[-5:]) + 1
+            else:
+                ordre = 1
+            self.numero = f"{prefix}{ordre:05d}"
+        super().save(*args, **kwargs)
     
     def auto_update_statut_candidature(self):
         """

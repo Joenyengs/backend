@@ -1,4 +1,4 @@
-#!/home/hoki/ENA_PROJETCT/backend/env/bin/python3
+#!/var/www/ena/backend/env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

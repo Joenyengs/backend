@@ -505,28 +505,18 @@ def update_profilcandidat_updated_at(sender, instance, **kwargs):
 
 @receiver(post_save, sender=CustomUser)
 def add_user_to_group(sender, instance, created, **kwargs):
-    if created or instance.role:  # Adjust logic as needed
-        if instance.role == "admin":
-            group = Group.objects.get(name="Admin")
-        elif instance.role == "evaluateur":
-            group = Group.objects.get(name="Evaluateur")
-        elif instance.role == "candidat":
-            group = Group.objects.get(name="Candidat")
-        elif instance.role == "alumni":
-            group = Group.objects.get(name="Alumni")
-        elif instance.role == "formateur":
-            group = Group.objects.get(name="Formateur")
-        elif instance.role == "eleve":
-            group = Group.objects.get(name="Eleve")
-        else:
-            group = None
+    if created or instance.role:
+        role_group_map = {
+            "admin": "Admin",
+            "evaluateur": "Evaluateur",
+            "candidat": "Candidat",
+            "alumni": "Alumni",
+            "formateur": "Formateur",
+            "eleve": "Eleve",
+        }
 
-        if group:
-            instance.groups.clear()  # Optional: remove from other groups
+        group_name = role_group_map.get(instance.role)
+        if group_name:
+            group, _ = Group.objects.get_or_create(name=group_name)
+            instance.groups.clear()  
             instance.groups.add(group)
-
-# Usage example:
-# profil = ProfilCandidat.objects.get(pk=...)
-# result = profil_candidat_completion_ratio(profil)
-# print(result)
-

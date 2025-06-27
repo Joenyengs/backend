@@ -904,5 +904,4 @@ class ActiveGroupsListView(ListAPIView):
     queryset = Group.objects.filter(user__is_active=True).distinct()
     serializer_class = GroupSerializer
     permission_classes = [IsAdminUser]
-
-
+    

@@ -1,0 +1,1654 @@
+openapi: 3.0.3
+info:
+  title: ENA API
+  version: 1.0.0
+  description: API pour l'application de l'ENA
+paths:
+  /api/recrutement/candidature/{id}/:
+    get:
+      operationId: recrutement_candidature_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidature'
+          description: ''
+    put:
+      operationId: recrutement_candidature_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidatureRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CandidatureRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CandidatureRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidature'
+          description: ''
+    patch:
+      operationId: recrutement_candidature_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCandidatureRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCandidatureRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCandidatureRequest'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidature'
+          description: ''
+  /api/recrutement/candidature/{id}/historique-traitements/:
+    get:
+      operationId: recrutement_candidature_historique_traitements_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Traitement'
+          description: ''
+  /api/recrutement/candidature/{id}/traiter/:
+    get:
+      operationId: recrutement_candidature_traiter_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TraiterCandidature'
+          description: ''
+    post:
+      operationId: recrutement_candidature_traiter_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TraiterCandidatureRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TraiterCandidatureRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TraiterCandidatureRequest'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TraiterCandidature'
+          description: ''
+    put:
+      operationId: recrutement_candidature_traiter_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TraiterCandidatureRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TraiterCandidatureRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TraiterCandidatureRequest'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TraiterCandidature'
+          description: ''
+    patch:
+      operationId: recrutement_candidature_traiter_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTraiterCandidatureRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTraiterCandidatureRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTraiterCandidatureRequest'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TraiterCandidature'
+          description: ''
+  /api/recrutement/candidatures/:
+    get:
+      operationId: recrutement_candidatures_list
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Candidature'
+          description: ''
+  /api/recrutement/candidatures/a-traiter/:
+    get:
+      operationId: recrutement_candidatures_a_traiter_list
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Candidature'
+          description: ''
+  /api/recrutement/candidatures/add/:
+    post:
+      operationId: recrutement_candidatures_add_create
+      tags:
+      - recrutement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidatureRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CandidatureRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CandidatureRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidature'
+          description: ''
+  /api/recrutement/candidatures/export-non-retenues-excel/:
+    get:
+      operationId: recrutement_candidatures_export_non_retenues_excel_retrieve
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/recrutement/candidatures/export-retenues-excel/:
+    get:
+      operationId: recrutement_candidatures_export_retenues_excel_retrieve
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/recrutement/candidatures/export-stats-excel/:
+    get:
+      operationId: recrutement_candidatures_export_stats_excel_retrieve
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/recrutement/candidatures/statistiques-non-traitees/:
+    get:
+      operationId: recrutement_candidatures_statistiques_non_traitees_retrieve
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/recrutement/candidatures/statistiques-premier-evaluateur/:
+    get:
+      operationId: recrutement_candidatures_statistiques_premier_evaluateur_retrieve
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/recrutement/candidatures/statistiques-province-genre/:
+    get:
+      operationId: recrutement_candidatures_statistiques_province_genre_retrieve
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/recrutement/candidatures/statistiques-retenues/:
+    get:
+      operationId: recrutement_candidatures_statistiques_retenues_retrieve
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/recrutement/candidatures/statistiques-second-evaluateur/:
+    get:
+      operationId: recrutement_candidatures_statistiques_second_evaluateur_retrieve
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/recrutement/recours/:
+    get:
+      operationId: recrutement_recours_list
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recours'
+          description: ''
+  /api/recrutement/recours/{id}/historique/:
+    get:
+      operationId: recrutement_recours_historique_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecoursActionHistory'
+          description: ''
+  /api/recrutement/recours/{id}/traiter/:
+    patch:
+      operationId: recrutement_recours_traiter_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRecoursRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRecoursRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRecoursRequest'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recours'
+          description: ''
+  /api/recrutement/recours/add/:
+    post:
+      operationId: recrutement_recours_add_create
+      tags:
+      - recrutement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecoursRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RecoursRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RecoursRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recours'
+          description: ''
+  /api/recrutement/training/:
+    get:
+      operationId: recrutement_training_list
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrainingModule'
+          description: ''
+  /api/recrutement/training/{id}/:
+    get:
+      operationId: recrutement_training_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingModule'
+          description: ''
+  /api/recrutement/training/progress/:
+    get:
+      operationId: recrutement_training_progress_retrieve
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/recrutement/training/quiz-answers/:
+    get:
+      operationId: recrutement_training_quiz_answers_list
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QuizAnswer'
+          description: ''
+  /api/recrutement/training/quiz-submit/:
+    post:
+      operationId: recrutement_training_quiz_submit_create
+      tags:
+      - recrutement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuizAnswerRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/QuizAnswerRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/QuizAnswerRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizAnswer'
+          description: ''
+  /api/recrutement/training/started-modules/:
+    get:
+      operationId: recrutement_training_started_modules_list
+      tags:
+      - recrutement
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrainingModule'
+          description: ''
+  /api/token/:
+    post:
+      operationId: token_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPairRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPairRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPairRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/token/refresh/:
+    post:
+      operationId: token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/users/activate/{uidb64}/{token}/:
+    get:
+      operationId: users_activate_retrieve
+      parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: uidb64
+        schema:
+          type: string
+        required: true
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivateUser'
+          description: ''
+    post:
+      operationId: users_activate_create
+      parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: uidb64
+        schema:
+          type: string
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateUserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ActivateUserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ActivateUserRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivateUser'
+          description: ''
+  /api/users/admin-bulk-create/:
+    post:
+      operationId: users_admin_bulk_create_create
+      tags:
+      - users
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUploadRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUpload'
+          description: ''
+  /api/users/admin-create-user/:
+    post:
+      operationId: users_admin_create_user_create
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminCreateUserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AdminCreateUserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AdminCreateUserRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminCreateUser'
+          description: ''
+  /api/users/google-login/:
+    post:
+      operationId: users_google_login_create
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/users/logout/:
+    post:
+      operationId: users_logout_create
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/users/notifications/:
+    get:
+      operationId: users_notifications_list
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+          description: ''
+  /api/users/notifications/{id}/read/:
+    patch:
+      operationId: users_notifications_read_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/users/register/:
+    post:
+      operationId: users_register_create
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterUser'
+          description: ''
+  /api/users/user-info/:
+    get:
+      operationId: users_user_info_retrieve
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUser'
+          description: ''
+    put:
+      operationId: users_user_info_update
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomUserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomUserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomUserRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUser'
+          description: ''
+    patch:
+      operationId: users_user_info_partial_update
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomUserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomUserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomUserRequest'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUser'
+          description: ''
+  /api/users/user-list/:
+    get:
+      operationId: users_user_list_list
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomUser'
+          description: ''
+components:
+  schemas:
+    ActivateUser:
+      type: object
+      properties:
+        password:
+          type: string
+          title: Mot de passe
+          maxLength: 128
+      required:
+      - password
+    ActivateUserRequest:
+      type: object
+      properties:
+        password:
+          type: string
+          minLength: 1
+          title: Mot de passe
+          maxLength: 128
+      required:
+      - password
+    AdminCreateUser:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+      required:
+      - email
+      - role
+    AdminCreateUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 254
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+      required:
+      - email
+      - role
+    Candidature:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        titre:
+          type: string
+          readOnly: true
+        lettre_motivation:
+          type: string
+          format: uri
+        cv:
+          type: string
+          format: uri
+        diplome:
+          type: string
+          format: uri
+        aptitude_physique:
+          type: string
+          format: uri
+        piece_identite:
+          type: string
+          format: uri
+        statut:
+          allOf:
+          - $ref: '#/components/schemas/StatutEnum'
+          readOnly: true
+        commentaire_admin:
+          type: string
+          readOnly: true
+          nullable: true
+        date_creation:
+          type: string
+          format: date-time
+          readOnly: true
+        date_modification:
+          type: string
+          format: date-time
+          readOnly: true
+        candidat:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - aptitude_physique
+      - candidat
+      - commentaire_admin
+      - cv
+      - date_creation
+      - date_modification
+      - diplome
+      - id
+      - lettre_motivation
+      - piece_identite
+      - statut
+      - titre
+    CandidatureRequest:
+      type: object
+      properties:
+        lettre_motivation:
+          type: string
+          format: binary
+        cv:
+          type: string
+          format: binary
+        diplome:
+          type: string
+          format: binary
+        aptitude_physique:
+          type: string
+          format: binary
+        piece_identite:
+          type: string
+          format: binary
+      required:
+      - aptitude_physique
+      - cv
+      - diplome
+      - lettre_motivation
+      - piece_identite
+    CorrectOptionEnum:
+      enum:
+      - A
+      - B
+      - C
+      - D
+      type: string
+      description: |-
+        * `A` - A
+        * `B` - B
+        * `C` - C
+        * `D` - D
+    CustomUser:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        username:
+          type: string
+          title: Nom d’utilisateur
+          description: Requis. 150 caractères maximum. Uniquement des lettres, nombres
+            et les caractères « @ », « . », « + », « - » et « _ ».
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        date_de_naissance:
+          type: string
+          format: date
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 15
+        photo_filename:
+          type: string
+          readOnly: true
+        photo_url:
+          type: string
+          readOnly: true
+        adresse_physique:
+          type: string
+          nullable: true
+      required:
+      - email
+      - id
+      - photo_filename
+      - photo_url
+      - username
+    CustomUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 254
+        username:
+          type: string
+          minLength: 1
+          title: Nom d’utilisateur
+          description: Requis. 150 caractères maximum. Uniquement des lettres, nombres
+            et les caractères « @ », « . », « + », « - » et « _ ».
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        date_de_naissance:
+          type: string
+          format: date
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 15
+        adresse_physique:
+          type: string
+          nullable: true
+      required:
+      - email
+      - username
+    FileUpload:
+      type: object
+      properties:
+        file:
+          type: string
+          format: uri
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+      required:
+      - file
+      - role
+    FileUploadRequest:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+      required:
+      - file
+      - role
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        message:
+          type: string
+          maxLength: 512
+        is_read:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        link:
+          type: string
+          maxLength: 255
+      required:
+      - created_at
+      - id
+      - message
+    PatchedCandidatureRequest:
+      type: object
+      properties:
+        lettre_motivation:
+          type: string
+          format: binary
+        cv:
+          type: string
+          format: binary
+        diplome:
+          type: string
+          format: binary
+        aptitude_physique:
+          type: string
+          format: binary
+        piece_identite:
+          type: string
+          format: binary
+    PatchedCustomUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 254
+        username:
+          type: string
+          minLength: 1
+          title: Nom d’utilisateur
+          description: Requis. 150 caractères maximum. Uniquement des lettres, nombres
+            et les caractères « @ », « . », « + », « - » et « _ ».
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        date_de_naissance:
+          type: string
+          format: date
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 15
+        adresse_physique:
+          type: string
+          nullable: true
+    PatchedRecoursRequest:
+      type: object
+      properties:
+        motif_rejet:
+          type: string
+          minLength: 1
+        justification:
+          type: string
+          minLength: 1
+        document_justificatif:
+          type: string
+          format: binary
+          nullable: true
+    PatchedTraiterCandidatureRequest:
+      type: object
+      properties:
+        statut:
+          $ref: '#/components/schemas/StatutEnum'
+        commentaire_admin:
+          type: string
+          nullable: true
+    QuizAnswer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+        question:
+          type: string
+          format: uuid
+        selected_option:
+          $ref: '#/components/schemas/SelectedOptionEnum'
+        is_correct:
+          type: boolean
+          readOnly: true
+        answered_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - answered_at
+      - id
+      - is_correct
+      - question
+      - selected_option
+      - user
+    QuizAnswerRequest:
+      type: object
+      properties:
+        question:
+          type: string
+          format: uuid
+        selected_option:
+          $ref: '#/components/schemas/SelectedOptionEnum'
+      required:
+      - question
+      - selected_option
+    QuizQuestion:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        question:
+          type: string
+          maxLength: 500
+        option_a:
+          type: string
+          maxLength: 255
+        option_b:
+          type: string
+          maxLength: 255
+        option_c:
+          type: string
+          maxLength: 255
+        option_d:
+          type: string
+          maxLength: 255
+        correct_option:
+          $ref: '#/components/schemas/CorrectOptionEnum'
+        explanation:
+          type: string
+        module:
+          type: string
+          format: uuid
+      required:
+      - correct_option
+      - id
+      - module
+      - option_a
+      - option_b
+      - option_c
+      - option_d
+      - question
+    Recours:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        motif_rejet:
+          type: string
+        justification:
+          type: string
+        document_justificatif:
+          type: string
+          format: uri
+          nullable: true
+        date_soumission:
+          type: string
+          format: date-time
+          readOnly: true
+        traite:
+          type: boolean
+          readOnly: true
+        date_traitement:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        commentaire_admin:
+          type: string
+          readOnly: true
+          nullable: true
+        candidature:
+          type: string
+          format: uuid
+          readOnly: true
+        traite_par:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+      required:
+      - candidature
+      - commentaire_admin
+      - date_soumission
+      - date_traitement
+      - id
+      - justification
+      - motif_rejet
+      - traite
+      - traite_par
+    RecoursActionHistory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        action:
+          type: string
+          maxLength: 255
+        commentaire:
+          type: string
+        date_action:
+          type: string
+          format: date-time
+          readOnly: true
+        admin_email:
+          type: string
+          readOnly: true
+      required:
+      - action
+      - admin_email
+      - date_action
+      - id
+    RecoursRequest:
+      type: object
+      properties:
+        motif_rejet:
+          type: string
+          minLength: 1
+        justification:
+          type: string
+          minLength: 1
+        document_justificatif:
+          type: string
+          format: binary
+          nullable: true
+      required:
+      - justification
+      - motif_rejet
+    RegisterUser:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        username:
+          type: string
+          title: Nom d’utilisateur
+          description: Requis. 150 caractères maximum. Uniquement des lettres, nombres
+            et les caractères « @ », « . », « + », « - » et « _ ».
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - email
+      - username
+    RegisterUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 254
+        username:
+          type: string
+          minLength: 1
+          title: Nom d’utilisateur
+          description: Requis. 150 caractères maximum. Uniquement des lettres, nombres
+            et les caractères « @ », « . », « + », « - » et « _ ».
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+          title: Mot de passe
+          maxLength: 128
+      required:
+      - email
+      - password
+      - username
+    RoleEnum:
+      enum:
+      - admin
+      - alumni
+      - formateur
+      - eleve
+      - candidat
+      - evaluateur1
+      - evaluateur2
+      type: string
+      description: |-
+        * `admin` - Admin
+        * `alumni` - Ancien élève
+        * `formateur` - Formateur
+        * `eleve` - Elève
+        * `candidat` - Futur élève
+        * `evaluateur1` - Evaluateur premier niveau
+        * `evaluateur2` - Evaluateur second niveau
+    SelectedOptionEnum:
+      enum:
+      - A
+      - B
+      - C
+      - D
+      type: string
+      description: |-
+        * `A` - A
+        * `B` - B
+        * `C` - C
+        * `D` - D
+    StatutEnum:
+      enum:
+      - envoye
+      - en_traitement
+      - traite
+      - valide
+      - rejete
+      - recours
+      type: string
+      description: |-
+        * `envoye` - Envoyée
+        * `en_traitement` - En cours de traitement
+        * `traite` - Traitée
+        * `valide` - Validée
+        * `rejete` - Rejetée
+        * `recours` - Recours
+    TokenObtainPair:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - refresh
+    TokenObtainPairRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          writeOnly: true
+          minLength: 1
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+      required:
+      - email
+      - password
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+      required:
+      - access
+    TokenRefreshRequest:
+      type: object
+      properties:
+        refresh:
+          type: string
+          writeOnly: true
+          minLength: 1
+      required:
+      - refresh
+    TrainingModule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        content:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuizQuestion'
+          readOnly: true
+      required:
+      - content
+      - description
+      - id
+      - questions
+      - title
+    Traitement:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        candidature:
+          type: string
+          format: uuid
+        evaluateur_email:
+          type: string
+          format: email
+          readOnly: true
+        observations:
+          type: string
+        date_traitement:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - candidature
+      - date_traitement
+      - evaluateur_email
+      - id
+    TraiterCandidature:
+      type: object
+      properties:
+        statut:
+          $ref: '#/components/schemas/StatutEnum'
+        commentaire_admin:
+          type: string
+          nullable: true
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        cv_url:
+          type: string
+          readOnly: true
+        lettre_de_motivation_url:
+          type: string
+          readOnly: true
+        piece_identite_url:
+          type: string
+          readOnly: true
+        aptitude_physique_url:
+          type: string
+          readOnly: true
+        titre_academique_url:
+          type: string
+          readOnly: true
+      required:
+      - aptitude_physique_url
+      - cv_url
+      - id
+      - lettre_de_motivation_url
+      - piece_identite_url
+      - titre_academique_url
+    TraiterCandidatureRequest:
+      type: object
+      properties:
+        statut:
+          $ref: '#/components/schemas/StatutEnum'
+        commentaire_admin:
+          type: string
+          nullable: true
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

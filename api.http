@@ -1,0 +1,35 @@
+
+### Login to get JWT token
+POST  http://localhost:8000/api/token/
+Content-Type: application/json
+
+{
+  "email": "admin@ena.cd",
+  "password": "Parisi@25"
+}
+
+
+### Get user info
+GET  http://localhost:8000/api/users/user-info/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MzQ1NjIyLCJpYXQiOjE3NDgzNDUzMjIsImp0aSI6IjIxMjBkZTM2MmI1MjQxM2FiOTY3NWRjYmMyZmUwZGYxIiwidXNlcl9pZCI6IjRmNDQwNzkzLTRmYjgtNGIyMC1iZjBjLWQ1ZGU0MTNkNmU2MyJ9.sPJShOq3MqPR9AQv2qF55W-0C4-nivBq0GFdEVU34B4
+
+
+### Create a new user (admin only)
+### This endpoint is only accessible to users with admin privileges.
+POST  http://localhost:8000/api/users/admin-create-user/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MzQ1NjIyLCJpYXQiOjE3NDgzNDUzMjIsImp0aSI6IjIxMjBkZTM2MmI1MjQxM2FiOTY3NWRjYmMyZmUwZGYxIiwidXNlcl9pZCI6IjRmNDQwNzkzLTRmYjgtNGIyMC1iZjBjLWQ1ZGU0MTNkNmU2MyJ9.sPJShOq3MqPR9AQv2qF55W-0C4-nivBq0GFdEVU34B4
+
+{
+    "email": "abc@ena.cd",
+    "username": "abc",
+    "password": "123456*",
+    "first_name": "Ambroise",
+    "last_name": "Beaucoin",
+}
+
+### user list
+GET  http://localhost:8000/api/users/user-list/
+Content-Type: application/json
+Authorization: Bearer 
